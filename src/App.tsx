@@ -48,7 +48,7 @@ export default function App() {
 
   const needsToBeSaved = useMemo(() => {
     return !_.isEqual(initialBrandData, brands);
-  }, [brands]);
+  }, [brands, initialBrandData]);
 
   useConfirmBeforeUnload(needsToBeSaved);
 
