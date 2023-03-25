@@ -1,0 +1,47 @@
+/* OrderData.css */
+
+.list-item {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: flex-start;
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+  transition: slide-in 0.5s ease-in-out;
+}
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #4caf50;
+}
