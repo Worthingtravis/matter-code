@@ -13,6 +13,7 @@
 
 .card-content {
   max-width: fit-content;
+  height: 250px;
 }
 
 .card {
@@ -22,6 +23,27 @@
   background-color: #f7f7f7;
   flex-basis: calc(25% - 1rem);
   flex-grow: 1;
+  min-width: fit-content;
+  overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 0.5rem;
+  }
+  .card-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f7f7f7;
+  }
+
+  .card-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #f7f7f7;
+  }
 }
 
 .card-header {
@@ -45,6 +67,18 @@
   justify-content: space-between;
   margin-bottom: 1rem;
 }
+@media (max-width: 768px) {
+  .page-actions {
+    flex-direction: column;
+    margin: 0;
+    background-color: gray;
+    width: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+}
 
 .no-orders {
   font-style: italic;
@@ -64,6 +98,13 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 4rem;
   margin-bottom: 1rem;
+  /*  on mobile */
+}
+/*.list on mobile make only 1 column*/
+@media (max-width: 768px) {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 
 .btn {
@@ -125,6 +166,14 @@
   margin-left: 0;
 }
 
+.btn.add.add-brand {
+  min-height: fit-content;
+  font-size: 0.8rem;
+}
+.btn:hover {
+  background-color: #ccc;
+}
+
 .card-orders-title {
   font-size: 1.2rem;
   font-weight: bold;
@@ -136,9 +185,11 @@
 .list-orders {
   list-style-type: none;
   padding: 0;
-  max-height: 200px;
+
   overflow-y: auto;
-  min-width: 500px;
+  max-height: 150px;
+  min-height: 150px;
+
   width: 100%;
 }
 
@@ -154,9 +205,16 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  border: 1px solid #4caf50;
   padding: 0.5rem;
   border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .btn-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
 }
 
 .flex-group {

@@ -37,13 +37,15 @@ export function OrderData({
     <div className={"list-item"}>
       {orderKeys.map((orderKey) => (
         <div className={"input-wrapper"} key={orderKey}>
-          {/*<label className={"label"}>{orderKey}</label>*/}
           <input
             type={getInputType(orderKey)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.currentTarget.blur();
               }
+            }}
+            onClick={(e) => {
+              if (e.currentTarget.value === "0") e.currentTarget.select();
             }}
             value={getFormattedValue(orderKey)}
             name={`${brandIndex}.${orderKey}.${orderIndex}`}

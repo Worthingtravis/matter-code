@@ -1,6 +1,6 @@
 import React from "react";
 
-export  interface Brand {
+export interface Brand {
   name: string;
   orders: BrandOrder[];
 
