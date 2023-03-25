@@ -1,7 +1,6 @@
 import React from "react";
 import { BrandOrder, ChangeEventWithPath } from "../Interfaces";
 import "./OrderData.css";
-import { NotificationContext } from "../NotificationProvider";
 
 export function OrderData({
   brandIndex,
@@ -14,68 +13,45 @@ export function OrderData({
   order: BrandOrder;
   onChange: (event: ChangeEventWithPath) => void;
 }) {
-  // dynamically generate the name and id attributes for the input fields
-  // so that we can use the same onChange handler for all input fields
-  const names = Object.keys(order);
-  const { handleNotify, clearNotification } =
-    React.useContext(NotificationContext);
+  const orderKeys = Object.keys(order);
 
-  const getInputType = (name: string) => {
-    if (name === "date") {
+  const getInputType = (property: string) => {
+    if (property === "date") {
       return "date";
     }
     return "number";
   };
 
-  const getInputValue = (name: string) => {
+  const getFormattedValue = (property: string) => {
     try {
-      if (name === "date") {
+      if (property === "date") {
         return new Date(order.date).toISOString().slice(0, 10);
       }
-      return order.price;
+      return order[property];
     } catch (e) {
       return new Date().toISOString().slice(0, 10);
     }
   };
 
   return (
-    <li className={"list-item"}>
-      {names.map((name) => (
-        <div className={"input-wrapper"} key={name}>
-          <label
-            className={"label"}
-            htmlFor={`${brandIndex}.${name}.${orderIndex}`}
-          >
-            {name}
-          </label>
+    <div className={"list-item"}>
+      {orderKeys.map((orderKey) => (
+        <div className={"input-wrapper"} key={orderKey}>
+          {/*<label className={"label"}>{orderKey}</label>*/}
           <input
-            type={getInputType(name)}
+            type={getInputType(orderKey)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 e.currentTarget.blur();
               }
             }}
-            id={`${brandIndex}.${name}.${orderIndex}`}
-            value={getInputValue(name)}
-            name={`${brandIndex}.${name}.${orderIndex}`}
-            onClick={(e) => {
-              e.currentTarget.select();
-              handleNotify({
-                text: `You are editing ${name} for order ${
-                  orderIndex + 1
-                } of brand ${brandIndex + 1}`,
-                type: "info",
-                duration: 3000,
-              });
-            }}
-            onBlur={(e) => {
-              clearNotification();
-            }}
+            value={getFormattedValue(orderKey)}
+            name={`${brandIndex}.${orderKey}.${orderIndex}`}
             onChange={onChange}
             className={"input"}
           />
         </div>
       ))}
-    </li>
+    </div>
   );
 }
